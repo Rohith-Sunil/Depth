@@ -16,7 +16,7 @@ def draw_keypoints_and_match(img1, img2):
     kp1, des1 = orb.detectAndCompute(img1,None)
     kp2, des2 = orb.detectAndCompute(img2,None)
 
-    #________________________Brute Force Matcher_____________________________
+    #Brute Force Matcher
     # create BFMatcher object
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
@@ -29,32 +29,6 @@ def draw_keypoints_and_match(img1, img2):
     
     # Select first 30 matches.
     final_matches = matches[:30]
-
-    #___________________________________________________________________________
-
-    #________________________FLANN based Matcher________________________________
-    # FLANN_INDEX_LSH = 6
-    # index_params = dict(
-    #     algorithm=FLANN_INDEX_LSH,
-    #     table_number=6,  # 12
-    #     key_size=12,  # 20
-    #     multi_probe_level=1,
-    # )  # 2
-    # search_params = dict(checks=50)  # or pass empty dictionary
-    # flann = cv2.FlannBasedMatcher(index_params, search_params)
-    # flann_match_pairs = flann.knnMatch(des1, des2, k=2)
-    
-    # # Filter matches using the Lowe's ratio test
-    # ratio_threshold = 0.3
-    # filtered_matches = []
-    # for m, n in flann_match_pairs:
-    #     if m.distance < ratio_threshold * n.distance:
-    #         filtered_matches.append(m)
-    
-    # print("FMatches", len(filtered_matches))
-    # final_matches =  filtered_matches[:100]
-    #___________________________________________________________________________
-
 
     # Draw keypoints
     img_with_keypoints = cv2.drawMatches(img1,kp1,img2,kp2,final_matches,None,flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
