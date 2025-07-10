@@ -61,5 +61,21 @@ def ssd_correspondence(img1, img2):
     # Normalize for display
     disparity_scaled = cv2.normalize(disparity, None, 0, 255, cv2.NORM_MINMAX)
     disparity_scaled = np.uint8(disparity_scaled)
+
+    # Store unscaled before handling invalids for display use if needed
+    # disparity_unscaled = disparity.copy()
+
+    # # Create a mask for valid disparities
+    # valid_mask = disparity > 0
+
+    # # Optional: set invalid disparities to NaN or a large value
+    # disparity_for_depth = disparity.copy()
+    # disparity_for_depth[~valid_mask] = np.nan  # or 0.1 if you prefer
+
+    # # Normalize only valid disparities for display
+    # normalized = np.zeros_like(disparity)
+    # normalized[valid_mask] = cv2.normalize(disparity[valid_mask], None, 0, 255, cv2.NORM_MINMAX)
+    # disparity_scaled = np.uint8(normalized)
+
     
     return disparity_unscaled, disparity_scaled

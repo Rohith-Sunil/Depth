@@ -48,7 +48,7 @@ import numpy as np
 import cv2
 import os
 
-def rectification(img1, img2, pts1, pts2, F, output_dir="."):
+def rectification(img1, img2, pts1, pts2, F, output_dir="./output/"):
     """This function is used to rectify the images to make camera pose's parallel and thus make epiplines as horizontal.
         Since camera distortion parameters are not given we will use cv2.stereoRectifyUncalibrated(), instead of stereoRectify().
         
@@ -59,6 +59,7 @@ def rectification(img1, img2, pts1, pts2, F, output_dir="."):
     # Stereo rectification
     h1, w1 = img1.shape
     h2, w2 = img2.shape
+
 
     _, H1, H2 = cv2.stereoRectifyUncalibrated(np.float32(pts1), np.float32(pts2), F, imgSize=(w1, h1))
     print("H1",H1)
